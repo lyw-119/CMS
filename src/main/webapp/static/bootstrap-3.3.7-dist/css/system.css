@@ -1,0 +1,73 @@
+#page-a {
+    padding: 0 15px;
+    min-height: 100%;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    #page-a {
+        position: inherit;
+        margin: 0 0 0 250px;
+        padding: 0 30px;
+        border-left: 1px solid #e7e7e7;
+    }
+}
+.bg {
+    background: url(/Course_management_system/image/details.jpg) no-repeat;  
+    background-size:100% 100%;  
+  	background-attachment: fixed;  
+  }
+.course_state {
+    width: 330px;
+    background: #364247;
+    padding: 0 0px;
+    height: 400px;
+    overflow: hidden;
+}
+.course_state ul li {
+    height: 133px;
+    border-bottom: 1px solid #414f55;
+    
+}
+.course_state ul li em{
+	float:left;
+	margin: 20px 0px 0px 20px;
+    font-size: 40px;
+    color: #fff;
+    width:160px;
+}
+.curse_btn button {
+    height: 133px;
+    width: 100%;
+    background: #399;
+    text-align: center;
+    color: #fff;
+    font-size: 35px;
+    line-height: 100px;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+    text-align:center;
+}
+
+h2 {
+    font-size: 21px;
+    line-height: 32px;
+    display: block;
+    -webkit-margin-before: .83em;
+    -webkit-margin-after: .83em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    background-color: #399;
+    padding-left: 10px;
+    color: #fff;
+    font-weight: bold;
+}
+#content1 {
+    padding-left: 6px;
+    margin-top: 20px;
+    line-height: 23px;
+    min-height: 90px;
+    _height: 90px;
+    height: 100%;
+}

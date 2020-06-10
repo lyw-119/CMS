@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sise.design.dao.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.sise.design.bean.Task">
+    <id column="ta_id" jdbcType="INTEGER" property="taId" />
+    <result column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="tac_id" jdbcType="INTEGER" property="tacId" />
+    <result column="c_id" jdbcType="VARCHAR" property="cId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ta_id, s_id, name, content, tac_id, c_id
+  </sql>
+  <select id="selectByExample" parameterType="com.sise.design.bean.TaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where ta_id = #{taId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task
+    where ta_id = #{taId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sise.design.bean.TaskExample">
+    delete from task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sise.design.bean.Task">
+    insert into task (ta_id, s_id, name, 
+      content, tac_id, c_id
+      )
+    values (#{taId,jdbcType=INTEGER}, #{sId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{tacId,jdbcType=INTEGER}, #{cId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.design.bean.Task">
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taId != null">
+        ta_id,
+      </if>
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="tacId != null">
+        tac_id,
+      </if>
+      <if test="cId != null">
+        c_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taId != null">
+        #{taId,jdbcType=INTEGER},
+      </if>
+      <if test="sId != null">
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="tacId != null">
+        #{tacId,jdbcType=INTEGER},
+      </if>
+      <if test="cId != null">
+        #{cId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sise.design.bean.TaskExample" resultType="java.lang.Long">
+    select count(*) from task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update task
+    <set>
+      <if test="record.taId != null">
+        ta_id = #{record.taId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sId != null">
+        s_id = #{record.sId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacId != null">
+        tac_id = #{record.tacId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cId != null">
+        c_id = #{record.cId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update task
+    set ta_id = #{record.taId,jdbcType=INTEGER},
+      s_id = #{record.sId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      tac_id = #{record.tacId,jdbcType=INTEGER},
+      c_id = #{record.cId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.design.bean.Task">
+    update task
+    <set>
+      <if test="sId != null">
+        s_id = #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="tacId != null">
+        tac_id = #{tacId,jdbcType=INTEGER},
+      </if>
+      <if test="cId != null">
+        c_id = #{cId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ta_id = #{taId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.design.bean.Task">
+    update task
+    set s_id = #{sId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      tac_id = #{tacId,jdbcType=INTEGER},
+      c_id = #{cId,jdbcType=VARCHAR}
+    where ta_id = #{taId,jdbcType=INTEGER}
+  </update>
+</mapper>
